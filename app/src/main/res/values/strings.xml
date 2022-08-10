@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">QuizApp</string>
+    <string name="get_question">Get Question!</string>
+    <string name="searching_for_question">Searching for question</string>
+</resources>
