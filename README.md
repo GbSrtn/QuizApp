@@ -1,3 +1,3 @@
 # QuizApp
-My pet project
+My pet project:
 MVVM, Retrofit, Livedata, Coroutines, Clean architecture
