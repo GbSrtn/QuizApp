@@ -7,15 +7,16 @@ import com.example.quizapp.core.presentation.Communication
 
 class BaseCommunication : Communication {
 
-    private val liveData = MutableLiveData<String>()
+    private val liveData = MutableLiveData<Triple<String,Int, List<String>>>()
 
-    override fun showState(text: String) {
-        liveData.value = text
+    override fun showState(data: Triple<String,Int, List<String>>) {
+        liveData.value = data
     }
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<String>) {
+    override fun observe(owner: LifecycleOwner, observer: Observer<Triple<String,Int, List<String>>>) {
         liveData.observe(owner, observer)
     }
+
 
 //    override fun showState(state: State) {
 //        liveData.value = state

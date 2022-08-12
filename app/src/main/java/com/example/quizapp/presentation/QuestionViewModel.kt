@@ -19,13 +19,17 @@ class QuestionViewModel(
 ) : ViewModel(), BaseViewModel {
     override fun getQuestion() {
         viewModelScope.launch(dispatcher) {
-            communication.showState(interactor.getQuestionItem().to().getQuestion())
+            communication.showState(interactor.getQuestionItem().to().getQuiz())
         }
     }
 
-    override fun observer(owner: LifecycleOwner, observer: Observer<String>) {
+    override fun observer(owner: LifecycleOwner, observer: Observer<Triple<String,Int, List<String>>>) {
         communication.observe(owner,observer)
     }
 
-
+    override fun checkAnswer(buttonId: Int) {
+        viewModelScope.launch(dispatcher) {
+            communication.showState(interactor.changeButtonStatus(buttonId).to().getQuiz())
+        }
+    }
 }

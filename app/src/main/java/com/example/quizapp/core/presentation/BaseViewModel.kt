@@ -6,5 +6,6 @@ import com.example.quizapp.presentation.State
 
 interface BaseViewModel {
     fun getQuestion()
-    fun observer(owner: LifecycleOwner, observer: Observer<String>)
+    fun observer(owner: LifecycleOwner, observer: Observer<Triple<String,Int, List<String>>>)
+    fun checkAnswer(buttonId: Int)
 }

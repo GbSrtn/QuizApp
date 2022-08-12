@@ -54,7 +54,5 @@ sealed class State {
         override fun show(progress: ProgressBar) {
             progress.visibility = View.GONE
         }
-
-
     }
 }
