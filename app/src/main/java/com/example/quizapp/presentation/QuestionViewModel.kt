@@ -23,7 +23,7 @@ class QuestionViewModel(
         }
     }
 
-    override fun observer(owner: LifecycleOwner, observer: Observer<Triple<String,Int, List<String>>>) {
+    override fun observer(owner: LifecycleOwner, observer: Observer<Triple<String, Int, List<String>>>) {
         communication.observe(owner,observer)
     }
 

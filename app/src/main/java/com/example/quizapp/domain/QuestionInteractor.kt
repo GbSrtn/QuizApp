@@ -1,16 +1,19 @@
 package com.example.quizapp.domain
 
+import com.example.quizapp.core.data.QuestionDataModelMapper
 import com.example.quizapp.core.data.Repository
 import com.example.quizapp.core.domain.Interactor
 import java.lang.Exception
 
 class QuestionInteractor(
-    private val repository: Repository
+    private val repository: Repository,
+    private val mapper : QuestionDataModelMapper<QuizItem.Success>
+
 ) : Interactor {
     override suspend fun getQuestionItem(): QuizItem {
         try {
             val item = repository.getQuestion()
-            return QuizItem.Success(item.question, item.correctAnswer,item.incorrectAnswerList)
+            return item.map(mapper)
         } catch (e: Exception) {
             throw e
         }
@@ -19,15 +22,9 @@ class QuestionInteractor(
     //todo make proper changeButtonStatus
     override suspend fun changeButtonStatus(id: Int): QuizItem {
         return try {
-            val item = repository.getCached()
-            when (id) {
-                1 -> QuizItem.Success(item.question, "1", item.incorrectAnswerList)
-                2 -> QuizItem.Success(item.question, item.correctAnswer, listOf("2" , item.incorrectAnswerList[1] , item.incorrectAnswerList[2]))
-                3 -> QuizItem.Success(item.question,item.correctAnswer, listOf(item.incorrectAnswerList[0] , "3" , item.incorrectAnswerList[2]))
-                else -> QuizItem.Success(item.question,item.correctAnswer, listOf(item.incorrectAnswerList[0] , item.incorrectAnswerList[1] , "4"))
+                repository.getCached(id).map(mapper)
+            } catch (e: Exception) {
+                throw e
             }
-        } catch (e: Exception) {
-            throw e
-        }
     }
 }

@@ -8,16 +8,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.lifecycle.ViewModel
 import com.example.quizapp.QuizApp
 import com.example.quizapp.R
-import com.example.quizapp.data.BaseReposiroty
-import com.example.quizapp.data.net.QuestionCloudDataSource
-import com.example.quizapp.data.net.QuestionService
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -42,7 +34,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         answerButton3.setOnClickListener(this)
         answerButton4.setOnClickListener(this)
 
-        imageView.setImageResource(R.drawable.baseline_not_started_50)
+        imageView.setImageResource(R.drawable.ic_baseline_not_started_100)
         progressBar.visibility = View.GONE
 
         viewModel = (application as QuizApp).questionViewModel
@@ -54,12 +46,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             viewModel.getQuestion()
         }
 
-        viewModel.observer(this,  { (question, _, list) ->
+        viewModel.observer(this,  { (question, id, list) ->
             questionTextView.text = question
             questionButton.isEnabled = true
             progressBar.visibility = View.GONE
             imageView.visibility = View.VISIBLE
-            imageView.setImageResource(R.drawable.baseline_question_mark_50)
+            imageView.setImageResource(id)
             Log.d("TAGG", "onCreate: size list ${list.size}")
             answerButton1.text = list[0]
             answerButton2.text = list[1]
@@ -71,10 +63,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.answerButton1 -> viewModel.checkAnswer(1)
-            R.id.answerButton2 -> viewModel.checkAnswer(2)
-            R.id.answerButton3 -> viewModel.checkAnswer(3)
-            R.id.answerButton4 -> viewModel.checkAnswer(4)
+            R.id.answerButton1 -> viewModel.checkAnswer(0)
+            R.id.answerButton2 -> viewModel.checkAnswer(1)
+            R.id.answerButton3 -> viewModel.checkAnswer(2)
+            R.id.answerButton4 -> viewModel.checkAnswer(3)
         }
     }
 }

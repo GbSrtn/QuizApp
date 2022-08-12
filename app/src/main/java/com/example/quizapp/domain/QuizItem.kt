@@ -1,18 +1,28 @@
 package com.example.quizapp.domain
 
 import com.example.quizapp.core.Mapper
+import com.example.quizapp.presentation.*
 //import com.example.quizapp.presentation.QuestionUiModel
-import com.example.quizapp.presentation.QuizUiModel
 
 sealed class QuizItem : Mapper<QuizUiModel> {
 
     class Success(
+        val id : String,
         val question : String,
-        val correctAnswer : String,
-        val incorrectAnswers : List<String>
+        val answers : Pair<List<String>,Int>,
+        val result : Int
     ) : QuizItem() {
+        override fun to() = if (result == -1) {
+            BaseQuizUiModel(question, answers.first)
+        } else if (result == answers.second) {
+            CorrectQuizUiModel(question, answers.first)
+        } else {
+            IncorrectQuizUiModel(question, answers.first)
+        }
+    }
 
-        override fun to() =  QuizUiModel(question, correctAnswer, incorrectAnswers)
+    class Failed(private val failedText: String) : QuizItem() {
+        override fun to() = FailedQuizUiModel(failedText)
     }
 }
 

@@ -5,6 +5,7 @@ import com.example.quizapp.data.BaseReposiroty
 import com.example.quizapp.data.net.QuestionCloudDataSource
 import com.example.quizapp.data.net.QuestionService
 import com.example.quizapp.domain.QuestionInteractor
+import com.example.quizapp.domain.QuestionSuccessMapper
 import com.example.quizapp.presentation.BaseCommunication
 import com.example.quizapp.presentation.QuestionViewModel
 import okhttp3.OkHttpClient
@@ -32,7 +33,8 @@ class QuizApp : Application() {
 
         val cloudDataSource = QuestionCloudDataSource(retrofit.create(QuestionService::class.java))
         val repository = BaseReposiroty(cloudDataSource)
-        val interactor = QuestionInteractor(repository)
+        val mapper = QuestionSuccessMapper()
+        val interactor = QuestionInteractor(repository, mapper)
 
 
 

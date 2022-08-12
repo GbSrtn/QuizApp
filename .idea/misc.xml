@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/glebs/AndroidStudioProjects/QuizApp/app/src/main/res/drawable/baseline_done_24.xml" value="0.19479166666666667" />
         <entry key="..\:/Users/glebs/AndroidStudioProjects/QuizApp/app/src/main/res/drawable/baseline_not_started_20.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/glebs/AndroidStudioProjects/QuizApp/app/src/main/res/drawable/baseline_not_started_50.xml" value="0.1" />
         <entry key="..\:/Users/glebs/AndroidStudioProjects/QuizApp/app/src/main/res/drawable/baseline_question_mark_20.xml" value="0.26614583333333336" />

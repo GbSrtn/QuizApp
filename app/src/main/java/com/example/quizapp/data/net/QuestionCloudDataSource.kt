@@ -7,10 +7,10 @@ class QuestionCloudDataSource(
     private val service: QuestionService
 ) : CloudDataSource {
 
-    override fun getQuestion(): QuestionDataModel {
+    override fun getQuestion(): QuestionServerModel {
         try {
             val model = service.getQuestion().execute().body()!![0]
-            Log.d("TAG", "getQuestion: ${model.question}")
+            Log.d("TAGG", "getQuestion: ${model.question}")
             return model
 
         } catch (e : Exception) {
